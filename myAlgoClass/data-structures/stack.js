@@ -51,29 +51,51 @@ What's the time complexity?
  */
 
 function Stack(capacity) {
-  // implement me...
+  this._capacity = capacity || Infinity;
+  this._storage = [];
+  this._count = 0;
 }
 
-Stack.prototype.push = function(value) {
-  // implement me...
+Stack.prototype.push = function (value) {
+  if (this._count < this._capacity) {
+    this._storage[this._count++] = value;
+    return this._count;
+  }
+  return 'Max capacity already reached. Remove element before adding a new one.';
 };
-// Time complexity:
+// Time complexity: O(1)
 
-Stack.prototype.pop = function() {
-  // implement me...
+Stack.prototype.pop = function () {
+  if (this._count === 0) {
+    return 'No elements inside the stack. Add element before poping.'
+  }
+
+  var value = this._storage[--this._count];
+  delete this._storage[this._count];
+  if (this._count < 0) {
+    this._count = 0;
+  }
+  return value;
 };
-// Time complexity:
+// Time complexity: O(1)
 
-Stack.prototype.peek = function() {
-  // implement me...
-};
-// Time complexity:
+// Stack.prototype.peek = function () {
+//   // implement me...
+// };
+// // Time complexity:
 
-Stack.prototype.count = function() {
-  // implement me...
-};
-// Time complexity:
+// Stack.prototype.count = function () {
+//   // implement me...
+// };
+// // Time complexity:
 
+
+var myStack = new Stack(3);
+console.log(myStack.push('a'), 'should be 1');
+console.log(myStack.push('b'), 'should be 2');
+console.log(myStack.push('c'), 'should be 3');
+console.log(myStack.push('d'), 'should be Max capacity reached');
+console.log(myStack.pop(), 'should be c');
 
 /*
 *** Exercises:
