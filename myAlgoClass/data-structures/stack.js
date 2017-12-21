@@ -52,7 +52,7 @@ What's the time complexity?
 
 function Stack(capacity) {
   this._capacity = capacity || Infinity;
-  this._storage = [];
+  this._storage = {};
   this._count = 0;
 }
 
@@ -79,15 +79,19 @@ Stack.prototype.pop = function () {
 };
 // Time complexity: O(1)
 
-// Stack.prototype.peek = function () {
-//   // implement me...
-// };
-// // Time complexity:
+Stack.prototype.peek = function () {
+  if (this._count === 0) {
+    return 'No elements inside the stack. Add element before poping.'
+  }
+  var value = this._storage[this._count - 1];
+  return value;
+};
+// Time complexity: O(1)
 
-// Stack.prototype.count = function () {
-//   // implement me...
-// };
-// // Time complexity:
+Stack.prototype.count = function () {
+  return this._count;
+};
+// Time complexity: O(1)
 
 
 var myStack = new Stack(3);
@@ -96,6 +100,9 @@ console.log(myStack.push('b'), 'should be 2');
 console.log(myStack.push('c'), 'should be 3');
 console.log(myStack.push('d'), 'should be Max capacity reached');
 console.log(myStack.pop(), 'should be c');
+console.log(myStack.count(), 'should be 2');
+console.log(myStack.peek(), 'should be b');
+console.log(myStack.count(), 'should be 2');
 
 /*
 *** Exercises:
